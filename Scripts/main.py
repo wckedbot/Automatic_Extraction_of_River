@@ -1,6 +1,7 @@
 import cv2
 
 from Decorrelation_Stretch import *
+from Histogram_Thresholdin import *
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -11,6 +12,8 @@ if __name__ == '__main__':
     decorr_img = decorrstretch(img, 0)
     cv2.imshow("decorr", decorr_img)
     # cv2.imwrite('../Output_Image', decorr_img)
+    seg_img = hist_thres(decorr_img)
+    cv2.imshow('final', seg_img)
     cv2.waitKey()
     cv2.destroyAllWindows()
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

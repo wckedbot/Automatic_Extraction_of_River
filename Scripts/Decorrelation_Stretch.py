@@ -20,8 +20,8 @@ def decorrstretch(img, tol=None):
     img += mean
     img += offset
     output = img.reshape(original_shape)
-    print(output)
+    # print(output)
     for i in range(3):
         output[:, :, i] = 255 * (output[:, :, i] - output[:, :, i].min()) / (output[:, :, i].max() - output[:, :, i].min())
-    print("as", output)
+    # print("test", output)
     return output.astype(np.uint8)
