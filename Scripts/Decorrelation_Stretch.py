@@ -22,6 +22,11 @@ def decorrstretch(img, tol=None):
     output = img.reshape(original_shape)
     # print(output)
     for i in range(3):
+        if tol:
+            # find lower and upper limit for contrast stretching
+            low, high = np.percentile(output[:, :, i], 100 * tol), np.percentile(output[:, :, i], 100 - 100 * tol)
+            output[output < low] = low
+            output[output > high] = high
         output[:, :, i] = 255 * (output[:, :, i] - output[:, :, i].min()) / (output[:, :, i].max() - output[:, :, i].min())
     # print("test", output)
     return output.astype(np.uint8)

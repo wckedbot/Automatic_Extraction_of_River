@@ -28,10 +28,11 @@ def hist_thres(img):
                 right_weight -= histg[0][center+1]
                 center += 1
     print(center)
+    print(img)
     for i in range(len(img)):
         for j in range(len(img[0])):
             if img[i][j] > center:
-                img[i][j] = 0
-            else:
                 img[i][j] = 255
+            else:
+                img[i][j] = 0
     return img
