@@ -4,8 +4,11 @@ from matplotlib import pyplot as plt
 
 def hist_thres(img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    histg= plt.hist(img.ravel(),256,[0,256])
-    print(histg)
+    histg = cv2.calcHist([img], [0], None, [256], [0,256])
+    histg = [histg.ravel()]
+    figure, axis = plt.subplots(1, 1)
+    axis.hist(img.ravel(), 256, [0, 256])
+    # print(histg)
     start = np.min(np.where(histg[0] > 0))
     end = np.max(np.where(histg[0] > 0))
     center = (start + end) // 2
@@ -27,12 +30,11 @@ def hist_thres(img):
                 left_weight += histg[0][center+1]
                 right_weight -= histg[0][center+1]
                 center += 1
-    print(center)
-    print(img)
+        print(center)
     for i in range(len(img)):
         for j in range(len(img[0])):
-            if img[i][j] > center:
-                img[i][j] = 255
-            else:
+            if img[i][j] >= center:
                 img[i][j] = 0
+            elif img[i][j] <= center:
+                img[i][j] = 255
     return img

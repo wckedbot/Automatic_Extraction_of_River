@@ -17,8 +17,7 @@ def decorrstretch(img, tol=None):
     T = reduce(np.dot, [sigma, eigvec, strech_matrix, eigvec.T])
     offset = mean - np.dot(mean, T)
     img = np.dot(img, T)
-    img += mean
-    img += offset
+    img += mean + offset
     output = img.reshape(original_shape)
     # print(output)
     for i in range(3):
